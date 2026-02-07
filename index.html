@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Someone Special</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Sacramento&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(135deg, #1a0000, #3d0000, #1a0000, #2d0011);
+            background-size: 400% 400%;
+            animation: bgShift 10s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hearts-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -80px;
+            animation: floatUp linear infinite;
+            opacity: 0.7;
+            filter: drop-shadow(0 0 6px rgba(255, 0, 80, 0.5));
+        }
+
+        .floating-heart::before,
+        .floating-heart::after {
+            content: '';
+            position: absolute;
+            width: var(--size);
+            height: var(--size);
+            background: var(--color);
+            border-radius: 50% 50% 0 0;
+        }
+
+        .floating-heart::before {
+            left: calc(var(--size) * 0.5);
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .floating-heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.8; }
+            25% { transform: translateY(-25vh) rotate(15deg) scale(1.05); }
+            50% { transform: translateY(-50vh) rotate(-10deg) scale(0.95); opacity: 0.6; }
+            75% { transform: translateY(-75vh) rotate(20deg) scale(1.02); }
+            100% { transform: translateY(-110vh) rotate(-5deg) scale(0.9); opacity: 0; }
+        }
+
+        .petal {
+            position: fixed;
+            width: 15px; height: 20px;
+            background: radial-gradient(ellipse, #ff3366 0%, #cc0033 60%, #990022 100%);
+            border-radius: 50% 50% 50% 0;
+            opacity: 0.6;
+            animation: petalFall linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes petalFall {
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.7; }
+            100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
+        }
+
+        .sparkle {
+            position: fixed;
+            width: 4px; height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnim ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .center-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .decorative-top, .decorative-bottom {
+            font-size: 2.5rem;
+            color: #ff4477;
+            text-shadow: 0 0 20px rgba(255, 68, 119, 0.7);
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { text-shadow: 0 0 20px rgba(255, 68, 119, 0.5); }
+            50% { text-shadow: 0 0 40px rgba(255, 68, 119, 1), 0 0 60px rgba(255, 0, 60, 0.5); }
+        }
+
+        .click-here-link {
+            display: inline-block;
+            margin: 30px 0;
+            padding: 25px 60px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(135deg, rgba(255, 0, 80, 0.3), rgba(200, 0, 60, 0.5), rgba(255, 0, 80, 0.3));
+            border: 2px solid rgba(255, 100, 150, 0.5);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-shadow: 0 0 15px rgba(255, 150, 180, 0.8), 0 2px 4px rgba(0,0,0,0.5);
+            animation: breathe 3s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 0, 80, 0.4), inset 0 0 30px rgba(255, 0, 80, 0.1); }
+            50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(255, 0, 80, 0.7), inset 0 0 50px rgba(255, 0, 80, 0.2), 0 0 100px rgba(255, 50, 100, 0.3); }
+        }
+
+        .click-here-link:hover {
+            background: linear-gradient(135deg, rgba(255, 0, 80, 0.6), rgba(220, 0, 80, 0.8), rgba(255, 0, 80, 0.6));
+            border-color: rgba(255, 150, 180, 0.9);
+            text-shadow: 0 0 30px rgba(255, 200, 220, 1), 0 0 60px rgba(255, 100, 150, 0.8);
+            transform: scale(1.1) !important;
+            box-shadow: 0 0 80px rgba(255, 0, 80, 0.8), 0 0 120px rgba(255, 50, 100, 0.4), inset 0 0 40px rgba(255, 0, 80, 0.3) !important;
+        }
+
+        .rose {
+            font-size: 3rem;
+            display: inline-block;
+            animation: roseSway 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 60, 0.5));
+        }
+
+        .rose:nth-child(odd) { animation-delay: -1.5s; }
+
+        @keyframes roseSway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .subtitle {
+            font-family: 'Sacramento', cursive;
+            color: #ff8899;
+            font-size: 1.5rem;
+            margin-top: 10px;
+            opacity: 0.8;
+            text-shadow: 0 0 10px rgba(255, 100, 150, 0.5);
+            animation: fadeInOut 4s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .glow-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 350px; height: 350px;
+            margin-top: -175px; margin-left: -175px;
+            border: 2px solid rgba(255, 0, 80, 0.2);
+            border-radius: 50%;
+            animation: ringPulse 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .glow-ring:nth-child(2) { width: 450px; height: 450px; margin-top: -225px; margin-left: -225px; animation-delay: -1.3s; }
+        .glow-ring:nth-child(3) { width: 550px; height: 550px; margin-top: -275px; margin-left: -275px; animation-delay: -2.6s; }
+
+        @keyframes ringPulse {
+            0%, 100% { opacity: 0.1; transform: scale(0.9); }
+            50% { opacity: 0.4; transform: scale(1.1); }
+        }
+
+        .trail {
+            position: fixed;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff4477, transparent);
+            pointer-events: none;
+            z-index: 9999;
+            animation: trailFade 0.8s ease-out forwards;
+        }
+
+        @keyframes trailFade {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container" id="heartsContainer"></div>
+    <div class="center-content">
+        <div class="glow-ring"></div>
+        <div class="glow-ring"></div>
+        <div class="glow-ring"></div>
+        <div class="decorative-top">
+            <span class="rose">🌹</span> 💕 <span class="rose">🌹</span>
+        </div>
+        <br>
+        <a href="love.html" class="click-here-link">Click Here</a>
+        <br><br>
+        <div class="decorative-bottom">
+            <span class="rose">🌹</span> 💕 <span class="rose">🌹</span>
+        </div>
+        <p class="subtitle">~ something special awaits you ~</p>
+    </div>
+
+    <script>
+        function createHeart() {
+            const container = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            const size = Math.random() * 15 + 8;
+            const colors = ['#ff1744', '#ff4477', '#e91e63', '#ff6b9d', '#c2185b', '#ff0055'];
+            heart.style.setProperty('--size', size + 'px');
+            heart.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 6 + 6) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 14000);
+        }
+        setInterval(createHeart, 400);
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            petal.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(petal);
+            setTimeout(() => petal.remove(), 10000);
+        }
+        setInterval(createPetal, 600);
+
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 4000);
+        }
+        setInterval(createSparkle, 200);
+
+        document.addEventListener('mousemove', (e) => {
+            const trail = document.createElement('div');
+            trail.classList.add('trail');
+            trail.style.left = e.clientX - 5 + 'px';
+            trail.style.top = e.clientY - 5 + 'px';
+            if (Math.random() > 0.5) {
+                trail.innerHTML = '💕';
+                trail.style.background = 'none';
+                trail.style.fontSize = '12px';
+                trail.style.width = 'auto';
+                trail.style.height = 'auto';
+            }
+            document.body.appendChild(trail);
+            setTimeout(() => trail.remove(), 800);
+        });
+    </script>
+</body>
+</html>
